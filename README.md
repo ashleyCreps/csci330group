@@ -9,9 +9,12 @@ Project 1 is our bowling score tracker
 
 
   set up url to push/pull from
+  
     https://github.com/USERNAME/REPOSITORY.git
     
   creating a remote (copy of repo on your computer, useful for branches)
+  
     git remote add origin https://github.com/user/repo.git
-    where "origin" is name of remote
+
+  where "origin" is name of remote
     
