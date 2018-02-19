@@ -30,7 +30,7 @@ Project 1 is our bowling score tracker
     ```git commit -m "I am a useful and concise message"```
   3. Send changes (commits) from local repo to branch in GitHub:
     ```git push origin <my branch name>```
-  4. Merge changes of your current branch with another:
+  4. Merge changes on another branch into your current branch:
     ```git merge branchname```
       * Often used to update local branch with changes from remote branch.
       
