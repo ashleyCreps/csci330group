@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int tenthframe = 19;
+const int tenthframe = 19; //index of first ball of tenthframe (ie, it is the 19th ball of the game)
 int getInput(int ball, int balls[]); //gets input and checks if input is valid, loops until valid input
 void printScores(int ball, int balls[]);
 int getNextBalls(int i, int balls[]);//returns the value of the next 2 balls
@@ -40,9 +40,9 @@ void printScores(int ball, int balls[])
 	int total=0;
 	
 	//print ball scores
-	for(int i=0; i<18; i=i+2)
+	for(int i=0; i< tenthframe-1; i=i+2)
 		cout<<"|"<<balls[i]<<" "<<balls[i+1];
-	cout<<"|"<<balls[18]<<" "<<balls[19]<<" "<<balls[20]<<"|"<<endl;
+	cout<<"|"<<balls[tenthframe-1]<<" "<<balls[tenthframe]<<" "<<balls[tenthframe+1]<<"|"<<endl;
 	
 	//print frame totals
 	for(int i=0; i<ball-1; i=i+2)
@@ -61,15 +61,15 @@ void printScores(int ball, int balls[])
 			}
 			else//in 9th frame
 			{
-				total += balls[i]+balls[18]+balls[19];
-				cout<<"| "<<balls[i]+balls[18]+balls[19]<<" ";
+				total += balls[i]+balls[tenthframe-1]+balls[tenthframe];
+				cout<<"| "<<balls[i]+balls[tenthframe-1]+balls[tenthframe]<<" ";
 			}
 		}
 	}
 	if(ball >= tenthframe)
 	{
-		total += balls[18]+balls[19]+balls[20];
-		cout<<"| "<<balls[18]+balls[19]+balls[20]<<"   ";
+		total += balls[tenthframe-1]+balls[tenthframe]+balls[tenthframe+1];
+		cout<<"| "<<balls[tenthframe-1]+balls[tenthframe]+balls[tenthframe+1]<<"   ";
 	}
 	cout<<"|\nGRAND TOTAL: "<<total<<endl;
 }
@@ -77,7 +77,7 @@ void printScores(int ball, int balls[])
 //returns value of next 2 balls
 int getNextBalls(int i, int balls[])
 {
-	if(i<19)//not 10th frame
+	if(i<tenthframe)//not 10th frame
 	{
 		if(balls[i]!=10) //next ball not strike
 			return balls[i]+balls[i+1];
@@ -139,7 +139,7 @@ int getInput(int ball, int balls[])
 		{
 			if( score >= 0 && score <= 10 )//score is in range
 			{
-				if( balls[18]+balls[19]+balls[20]+score <= 30)//10th frame total <= 30
+				if( balls[tenthframe-1]+balls[tenthframe]+balls[tenthframe+1]+score <= 30)//10th frame total <= 30
 					valid = true;
 			}
 			
@@ -162,14 +162,14 @@ void tenthFrame(int balls[])
 	
 	//get roll1
 	roll1 = getInput(tenthframe, balls);
-	balls[18]=roll1;
+	balls[tenthframe-1]=roll1;
 	
 	//print scores
 	printScores(tenthframe, balls);
 	
 	//validate roll2
 	roll2 = getInput(tenthframe, balls);
-	balls[19]=roll2;
+	balls[tenthframe]=roll2;
 	
 	//print scores
 	printScores(tenthframe, balls);
@@ -179,7 +179,7 @@ void tenthFrame(int balls[])
 	{
 		//get roll3
 		roll3 = getInput(tenthframe, balls);
-		balls[20]=roll3;
+		balls[tenthframe+1]=roll3;
 		
 		//print scores
 		printScores(tenthframe, balls);
