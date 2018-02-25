@@ -16,6 +16,8 @@ int main()
 	for(int i=0; i<21; ++i)
 		balls[i]=0;
 	
+	cout<<"Welcome to Bowling!\n(Inputs must be integers from 0 to 10.)"<<endl;
+	
 	int score=0;//input variable
 	int ball=1;//current ball
 	//run game through 9th frame
@@ -95,7 +97,7 @@ int getInput(int ball, int balls[])
 	bool valid = false;
 	bool notInt = false;
 	
-	cout<<"Next Ball: ";
+	cout<<"Next Ball(s): ";
 	cin>>score;
 	
 	if(cin.fail())//not an int type
@@ -107,7 +109,7 @@ int getInput(int ball, int balls[])
 	while(notInt)
 	{
 		cin.clear();
-		cout<<"Invalid Input1. Try again:";
+		cout<<"Invalid Input. Input must be an integer from 0 to 10.\nTry again:";
 		cin.ignore();
 		cin>>score;
 		if(cin.good())
@@ -128,7 +130,7 @@ int getInput(int ball, int balls[])
 		
 			if( !valid )//input not valid
 			{
-				cout<<"Invalid Input2. Try again:";
+				cout<<"Invalid Input. Input must be an integer from 0 to 10 and sum of 1st and 2nd ball can't excede 10.'\nTry again:";
 				cin>> score;
 			}
 		}
@@ -145,7 +147,7 @@ int getInput(int ball, int balls[])
 			
 			if( !valid )//invalid input
 			{
-				cout<<"Invalid Input3. Try again."<<endl;
+				cout<<"Invalid Input. Try again."<<endl;
 				cin>>score;
 			}
 		}
@@ -167,8 +169,17 @@ void tenthFrame(int balls[])
 	//print scores
 	printScores(tenthframe, balls);
 	
-	//validate roll2
+	//check roll2
 	roll2 = getInput(tenthframe, balls);
+	if(roll1 < 10)
+	{
+		while(roll2 > 10-roll1)
+		{
+			cout<<"Input Invalid. ";
+			roll2 = getInput(tenthframe, balls);
+		}
+	}
+	
 	balls[tenthframe]=roll2;
 	
 	//print scores
@@ -179,19 +190,19 @@ void tenthFrame(int balls[])
 	{
 		//get roll3
 		roll3 = getInput(tenthframe, balls);
+		if(roll2 < 10 && roll1+roll2 != 10)
+		{
+			while(roll3 > 10-roll2)
+			{
+				cout<<"Input Invalid. ";
+				roll3 = getInput(tenthframe, balls);
+			}
+			
+		}
 		balls[tenthframe+1]=roll3;
-		
 		//print scores
 		printScores(tenthframe, balls);
 
 	}
 	//end of game...
 }
-
-
-
-
-
-
-
-
